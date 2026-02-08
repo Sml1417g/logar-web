@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LOGAR | Tienda Comunitaria Inclusiva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Accesibilidad -->
+  <meta name="description" content="Tienda comunitaria LOGAR con acceso a canasta básica, carrito accesible y entrega a domicilio.">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f8f6;
+      color: #003333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #2e7d32;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    button:focus {
+      outline: 3px solid #ffeb3b;
+    }
+
+    .carrito {
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .audio-btn {
+      margin-top: 10px;
+      background: #1565c0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>LOGAR</h1>
+  <p>Acceso justo y cercano a alimentos básicos</p>
+  <button class="audio-btn" onclick="leerPagina()">?? Escuchar esta página</button>
+</header>
+
+<section>
+  <h2>Catálogo de Productos</h2>
+
+  <div class="productos">
+    <div class="card">
+      <h3>Maíz 1 kg</h3>
+      <p>$8 MXN</p>
+      <button onclick="agregar('Maíz', 8)">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+      <h3>Frijol 1 kg</h3>
+      <p>$22 MXN</p>
+      <button onclick="agregar('Frijol', 22)">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+      <h3>Arroz 1 kg</h3>
+      <p>$18 MXN</p>
+      <button onclick="agregar('Arroz', 18)">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+      <h3>Detergente 1 kg</h3>
+      <p>$30 MXN</p>
+      <button onclick="agregar('Detergente', 30)">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+      <h3>Cloro 1 L</h3>
+      <p>$15 MXN</p>
+      <button onclick="agregar('Cloro', 15)">Agregar al carrito</button>
+    </div>
+  </div>
+</section>
+
+<section class="carrito" aria-label="Carrito de compras">
+  <h2>?? Carrito de Compras</h2>
+  <ul id="lista"></ul>
+  <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
+  <button onclick="alert('Pedido confirmado. Entrega a domicilio programada.')">
+    Confirmar pedido
+  </button>
+</section>
+
+<footer>
+  <p>LOGAR – Alimentación digna, justa e inclusiva</p>
+</footer>
+
+<script>
+  let total = 0;
+
+  function agregar(nombre, precio) {
+    const lista = document.getElementById("lista");
+    const item = document.createElement("li");
+    item.textContent = nombre + " - $" + precio;
+    lista.appendChild(item);
+
+    total += precio;
+    document.getElementById("total").textContent = total;
+  }
+
+  function leerPagina() {
+    const texto = document.body.innerText;
+    const voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = "es-MX";
+    speechSynthesis.speak(voz);
+  }
+</script>
+
+</body>
+</html>
